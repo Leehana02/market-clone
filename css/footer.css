@@ -14,7 +14,7 @@ footer {
   align-items: center;
 }
 .footer-icons {
-  font-size: 7px;
+  font-size: 12px;
   flex-direction: column;
   display: flex;
   justify-content: center;
@@ -25,7 +25,7 @@ footer {
 .footer-icons__desc {
   margin-top: 5px;
   font-weight: bold;
-  transform: scale(0.8);
+  transform: scale(1);
 }
 .footer-icons__img {
   width: 30px;
