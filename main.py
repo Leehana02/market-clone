@@ -8,10 +8,6 @@ import sqlite3
 con = sqlite3.connect('db.db', check_same_thread=False)
 cur = con.cursor()
 
-# 만약 배포를 하게 되면 백엔드 서버에서 테이블을 생성해줘야하는데 테이블이 없으면 데이터를 넣을 곳이 없음
-# 따라서 백엔드코드에서 자동으로 생성 할 수 있도록 테이블을 넣어준거임
-# 테이블이 있는 상태에서 들어가면 테이블이 존재한다는 애러를 발생하기 때문에 
-# IF NOT EXIST라는 조건문을 넣으면, 테이블이 없을 때만 생성하게되는 SQL문이 생성됨
 cur.execute(f"""
             CREATE TABLE IF NOT EXISTS items (
 	            id INTEGER PRIMARY KEY,
@@ -62,5 +58,10 @@ async def get_image(item_id):
                               """).fetchone()[0]
     
     return Response(content=bytes.fromhex(image_bytes), media_type='image/*')
+
+@app.post('/signup')
+def signup(id:Annotated[str,Form()], password:Annotated[str,Form()]):
+    print(id, password)
+    return '200'
 
 app.mount("/", StaticFiles(directory='frontend', html=True), name='frontend')
